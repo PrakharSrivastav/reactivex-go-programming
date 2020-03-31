@@ -2,17 +2,28 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"github.com/reactivex/rxgo/v2"
 )
 
+var e1 = errors.New("error 1")
+var e2 = errors.New("error 2")
+
 func main() {
-	observable := rxgo.Just(1, 2, 3, 4, 5, 6)(). // create
+	observable := rxgo.Just(1, 2, 3, 4, 5, e1, 6, e2)(). // create
 		Map(times10). // operate
 		Filter(greaterThan30) // operate
 
-	for item := range observable.Observe() { // observe
-		fmt.Println("items are ::", item.V)
+	// Observe
+	for item := range observable.Observe() { // this will stop on first error
+		//for item := range observable.Observe(rxgo.WithErrorStrategy(rxgo.ContinueOnError)) { // this will continue all errors
+		switch {
+		case item.Error():
+			fmt.Println("error :: ", item.E)
+		default:
+			fmt.Println("items ::", item.V)
+		}
 	}
 }
 
