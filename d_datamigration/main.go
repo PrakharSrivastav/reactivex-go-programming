@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/PrakharSrivastav/reactivex-go-programming/x_datamigration/sink"
-	"github.com/PrakharSrivastav/reactivex-go-programming/x_datamigration/source"
-	"github.com/PrakharSrivastav/reactivex-go-programming/x_datamigration/transform"
+	"github.com/PrakharSrivastav/reactivex-go-programming/d_datamigration/sink"
+	"github.com/PrakharSrivastav/reactivex-go-programming/d_datamigration/source"
+	"github.com/PrakharSrivastav/reactivex-go-programming/d_datamigration/transform"
 	"github.com/reactivex/rxgo/v2"
 	"log"
 	"strings"
